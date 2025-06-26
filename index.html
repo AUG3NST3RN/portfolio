@@ -61,7 +61,7 @@
             text-transform: uppercase;
         }
         
-        /* 语言切换 */
+        /* 语言切换按钮基础样式调整 */
         .language-switcher {
             position: fixed;
             top: 20px;
@@ -73,6 +73,8 @@
             overflow: hidden;
             border: 1px solid rgba(0, 243, 255, 0.3);
             box-shadow: var(--glow);
+            transition: all 0.3s ease;
+            transform-origin: top right;
         }
         
         .lang-btn {
@@ -102,7 +104,7 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(5, 5, 15, 0.96); /* 深色背景 */
+            background: rgba(5, 5, 15, 0.96);
             backdrop-filter: blur(10px);
             padding: 1.2rem 5%;
             display: flex;
@@ -123,12 +125,16 @@
             text-shadow: var(--glow);
             font-family: 'Orbitron', sans-serif;
             letter-spacing: 2px;
+            flex-shrink: 0;
         }
         
         .nav-links {
             display: flex;
-            gap: 3.5rem; /* 增大tab间距 */
-            margin-right: 120px; /* 为语言切换按钮留出空间 */
+            gap: 3.5rem;
+            margin-right: 120px;
+            flex-wrap: nowrap;
+            margin-left: auto;
+            padding-left: 20px;
         }
         
         .nav-links a {
@@ -646,22 +652,32 @@
             padding: 15px;
             border-radius: 8px;
             border: 1px solid rgba(0, 243, 255, 0.3);
-            background: #23262f; /* 深灰色输入框 */
-            color: #fff;
+            background: rgba(35, 38, 47, 0.8);
+            color: var(--light);
             font-family: 'Exo 2', sans-serif;
             font-size: 1rem;
             margin-bottom: 20px;
             transition: all 0.3s ease;
             backdrop-filter: blur(5px);
-            cursor: text; /* 鼠标悬停为文本输入样式 */
+            position: relative;
+            z-index: 1;
+            pointer-events: auto;
         }
         
         input:focus, textarea:focus {
             outline: none;
             border-color: var(--primary);
             box-shadow: 0 0 15px var(--primary);
-            background: #23262f;
-            color: #fff;
+            background: rgba(35, 38, 47, 0.95);
+        }
+        
+        input::placeholder, textarea::placeholder {
+            color: rgba(230, 247, 255, 0.5);
+        }
+        
+        .contact-info form {
+            position: relative;
+            z-index: 2;
         }
         
         /* 表单状态消息 */
@@ -764,9 +780,166 @@
         }
         
         /* 响应式设计 */
-        @media (max-width: 992px) {
+        /* 大屏幕设备 (1200px以上) */
+        @media (min-width: 1201px) {
+            .container {
+                max-width: 1140px;
+            }
+            
+            .hero h1 {
+                font-size: 4.5rem;
+            }
+            
+            .tagline {
+                font-size: 2.2rem;
+            }
+            
+            .projects-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        /* 中等屏幕设备 (992px到1200px) */
+        @media (max-width: 1200px) {
+            .container {
+                max-width: 960px;
+                padding: 0 30px;
+            }
+            
+            .hero h1 {
+                font-size: 4rem;
+            }
+            
+            .tagline {
+                font-size: 2rem;
+            }
+            
+            .projects-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
             .about-content {
-                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .nav-links {
+                gap: 2.2rem;
+                margin-right: 100px;
+            }
+            
+            .logo {
+                font-size: 1.6rem;
+            }
+            
+            .language-switcher {
+                transform: scale(0.9);
+            }
+            
+            .lang-btn {
+                padding: 7px 18px;
+            }
+        }
+        
+        @media (max-width: 1000px) {
+            .navbar {
+                padding: 1.2rem 4%;
+            }
+            
+            .nav-links {
+                gap: 1.8rem;
+                margin-right: 90px;
+                padding-left: 15px;
+            }
+            
+            .nav-links a {
+                font-size: 0.95rem;
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+                letter-spacing: 1px;
+            }
+            
+            .language-switcher {
+                transform: scale(0.85);
+                top: 18px;
+                right: 18px;
+            }
+            
+            .lang-btn {
+                padding: 6px 16px;
+                font-size: 0.95rem;
+            }
+        }
+        
+        @media (max-width: 900px) {
+            .navbar {
+                padding: 1.2rem 3%;
+            }
+            
+            .nav-links {
+                gap: 1.4rem;
+                margin-right: 85px;
+                transform: translateX(-20px);
+            }
+            
+            .nav-links a {
+                font-size: 0.9rem;
+            }
+            
+            .logo {
+                font-size: 1.4rem;
+            }
+            
+            .language-switcher {
+                transform: scale(0.8);
+                top: 16px;
+                right: 16px;
+            }
+            
+            .lang-btn {
+                padding: 6px 14px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 800px) {
+            .navbar {
+                padding: 1.2rem 2.5%;
+            }
+            
+            .nav-links {
+                gap: 1.1rem;
+                margin-right: 80px;
+                transform: translateX(-30px);
+            }
+            
+            .nav-links a {
+                font-size: 0.85rem;
+                letter-spacing: 0.5px;
+            }
+            
+            .logo {
+                font-size: 1.3rem;
+            }
+            
+            .language-switcher {
+                transform: scale(0.75);
+                top: 15px;
+                right: 15px;
+            }
+            
+            .lang-btn {
+                padding: 5px 12px;
+                font-size: 0.85rem;
+                letter-spacing: 0.5px;
+            }
+        }
+        
+        /* 平板设备 (768px到991px) */
+        @media (max-width: 991px) {
+            .container {
+                max-width: 720px;
             }
             
             .hero h1 {
@@ -776,80 +949,226 @@
             .tagline {
                 font-size: 1.8rem;
             }
+            
+            .hero p {
+                font-size: 1.2rem;
+                padding: 0 20px;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .about-image {
+                max-width: 600px;
+                margin: 0 auto;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .skills-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+            
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
         }
         
-        @media (max-width: 768px) {
+        /* 大型手机设备 (576px到767px) */
+        @media (max-width: 767px) {
+            .container {
+                max-width: 540px;
+                padding: 0 20px;
+            }
+            
             .nav-links {
                 display: none;
             }
             
-            .hero h1 {
-                font-size: 2.8rem;
+            .navbar {
+                padding: 1.2rem 5%;
+                justify-content: center;
             }
             
-            .section-title {
-                font-size: 2.3rem;
-            }
-            
-            .about {
-                padding: 30px;
-            }
-            
-            .projects-grid {
-                grid-template-columns: 1fr;
+            .logo {
+                font-size: 1.5rem;
             }
             
             .language-switcher {
+                transform: scale(0.85);
                 top: 15px;
                 right: 15px;
             }
             
             .lang-btn {
-                padding: 6px 15px;
+                padding: 6px 16px;
                 font-size: 0.9rem;
             }
         }
         
-        /* 动画效果 */
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+        /* 小型手机设备 (575px以下) */
+        @media (max-width: 575px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            .navbar {
+                padding: 0.8rem 4%;
+            }
+            
+            .logo {
+                font-size: 1.3rem;
+            }
+            
+            .language-switcher {
+                transform: scale(0.75);
+                top: 12px;
+                right: 12px;
+            }
+            
+            .lang-btn {
+                padding: 5px 12px;
+                font-size: 0.85rem;
+            }
         }
         
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
+        /* 超小型手机设备 (375px以下) */
+        @media (max-width: 375px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .tagline {
+                font-size: 1.2rem;
+            }
+            
+            .btn {
+                padding: 10px 25px;
+                font-size: 0.9rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .project-title {
+                font-size: 1.2rem;
+            }
+            
+            .contact-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+            
+            .language-switcher {
+                transform: scale(0.7);
+                top: 10px;
+                right: 10px;
+            }
+            
+            .lang-btn {
+                padding: 4px 10px;
+                font-size: 0.8rem;
+                letter-spacing: 0.5px;
+            }
         }
         
-        .floating {
-            animation: float 6s ease-in-out infinite;
+        /* 横屏模式适配 */
+        @media (max-height: 600px) and (orientation: landscape) {
+            .hero {
+                min-height: 120vh;
+            }
+            
+            .hero-content {
+                padding-top: 100px;
+            }
+            
+            .section {
+                padding: 40px 0;
+            }
+            
+            .about-content {
+                gap: 20px;
+            }
         }
         
-        .pulse {
-            animation: pulse 3s ease-in-out infinite;
+        /* 深色模式适配 */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --dark: #181a20;
+                --darker: #101217;
+                --light: #e6f7ff;
+            }
         }
         
-        /* 科幻元素 */
-        .sci-fi-element {
-            position: absolute;
-            z-index: 0;
-            pointer-events: none;
+        /* 减少动画适配 */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
+            }
+            
+            .floating {
+                animation: none !important;
+            }
+            
+            .pulse {
+                animation: none !important;
+            }
+            
+            .btn::before {
+                display: none;
+            }
         }
         
-        .grid-line {
-            position: absolute;
-            background: rgba(0, 243, 255, 0.1);
-            z-index: -1;
+        /* 高对比度模式适配 */
+        @media (prefers-contrast: high) {
+            :root {
+                --primary: #00ffff;
+                --secondary: #8000ff;
+                --accent: #ff00ff;
+            }
+            
+            .btn, .skill-progress {
+                border: 2px solid #fff;
+            }
+            
+            .project-card, .skill-category, .contact-info {
+                border: 2px solid var(--primary);
+            }
         }
         
-        .hologram {
-            position: absolute;
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(0, 243, 255, 0.1) 0%, transparent 70%);
-            filter: blur(20px);
-            z-index: -1;
+        /* 打印样式适配 */
+        @media print {
+            body {
+                background: white;
+                color: black;
+            }
+            
+            .navbar, .language-switcher, .btn, .social-links {
+                display: none;
+            }
+            
+            .hero, .section {
+                padding: 20px 0;
+                page-break-inside: avoid;
+            }
+            
+            .container {
+                max-width: 100%;
+                padding: 0 20px;
+            }
+            
+            .project-card, .skill-category, .contact-info {
+                break-inside: avoid;
+                border: 1px solid #ccc;
+            }
         }
     </style>
 </head>
@@ -1296,16 +1615,16 @@
                 </div>
                 
                 <div class="contact-info">
-                    <h3 data-en="Send Message" data-zh="发送消息">Send Message</h3>
+                    <h3 data-en="Contact Me" data-zh="联系我">Contact Me</h3>
                     <form id="contact-form">
                         <div>
-                            <input type="text" id="name" placeholder="Your Name" data-en-placeholder="Your Name" data-zh-placeholder="您的姓名" required>
+                            <input type="text" id="name" placeholder="Your Name" data-en-placeholder="Your Name" data-zh-placeholder="您的姓名" required autocomplete="off">
                         </div>
                         <div>
-                            <input type="email" id="email" placeholder="Your Email" data-en-placeholder="Your Email" data-zh-placeholder="您的邮箱" required>
+                            <input type="email" id="email" placeholder="Your Email" data-en-placeholder="Your Email" data-zh-placeholder="您的邮箱" required autocomplete="off">
                         </div>
                         <div>
-                            <input type="text" id="subject" placeholder="Subject" data-en-placeholder="Subject" data-zh-placeholder="主题">
+                            <input type="text" id="subject" placeholder="Subject" data-en-placeholder="Subject" data-zh-placeholder="主题" autocomplete="off">
                         </div>
                         <div>
                             <textarea id="message" placeholder="Your Message" data-en-placeholder="Your Message" data-zh-placeholder="您的留言" rows="5" required></textarea>
