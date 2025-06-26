@@ -1,0 +1,1457 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anthony He - Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Exo+2:wght@100;200;300;400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* 基础样式 */
+        :root {
+            --primary: #00f3ff;
+            --secondary: #6a00ff;
+            --accent: #ff00c8;
+            --dark: #181a20; /* 深灰色 */
+            --darker: #101217; /* 更深灰色 */
+            --light: #e6f7ff;
+            --gray: #8a8f98;
+            --success: #00ff9d;
+            --warning: #ffd600;
+            --danger: #ff1744;
+            --glow: 0 0 15px var(--primary), 0 0 30px rgba(0, 243, 255, 0.3);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: var(--dark);
+            color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 400;
+            background-image: none;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 243, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 243, 255, 0.05) 1px, transparent 1px);
+            background-size: 30px 30px;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        /* 语言切换 */
+        .language-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 2000;
+            display: flex;
+            background: rgba(10, 10, 25, 0.8);
+            border-radius: 30px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 243, 255, 0.3);
+            box-shadow: var(--glow);
+        }
+        
+        .lang-btn {
+            padding: 8px 20px;
+            background: transparent;
+            border: none;
+            color: var(--light);
+            font-family: 'Exo 2', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .lang-btn.active {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: var(--dark);
+        }
+        
+        .lang-btn:hover:not(.active) {
+            background: rgba(0, 243, 255, 0.2);
+        }
+        
+        /* 导航栏 */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(5, 5, 15, 0.96); /* 深色背景 */
+            backdrop-filter: blur(10px);
+            padding: 1.2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 243, 255, 0.3);
+            box-shadow: var(--glow);
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: var(--glow);
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 2px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 3.5rem; /* 增大tab间距 */
+            margin-right: 120px; /* 为语言切换按钮留出空间 */
+        }
+        
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            font-family: 'Exo 2', sans-serif;
+            font-weight: 500;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+            text-shadow: var(--glow);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+            box-shadow: var(--glow);
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* 主要区域 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        section {
+            padding: 100px 0;
+        }
+        
+        /* 英雄区域 */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 70px;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(0, 243, 255, 0.1) 0%, transparent 70%);
+            z-index: -1;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            padding-top: 60px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: var(--glow);
+            letter-spacing: 4px;
+            line-height: 1.1;
+        }
+        
+        .hero p {
+            font-size: 1.4rem;
+            margin-bottom: 2.5rem;
+            color: var(--gray);
+            font-family: 'Exo 2', sans-serif;
+            font-weight: 300;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .tagline {
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            color: var(--light);
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 400;
+            letter-spacing: 3px;
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: var(--dark);
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--glow);
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+            z-index: -1;
+        }
+        
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 25px var(--primary), 0 0 50px rgba(0, 243, 255, 0.5);
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        /* 关于我 */
+        .about {
+            background: rgba(18, 18, 35, 0.5);
+            border-radius: 10px;
+            padding: 50px;
+            margin-top: 50px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), var(--glow);
+            border: 1px solid rgba(0, 243, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        
+        .section-title {
+            font-size: 2.8rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+            letter-spacing: 3px;
+            text-shadow: 0 0 15px var(--primary);
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+            box-shadow: var(--glow);
+        }
+        
+        .about-content {
+            display: flex;
+            gap: 50px;
+            align-items: center;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px var(--primary);
+        }
+        
+        .about-text p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            font-family: 'Exo 2', sans-serif;
+            font-weight: 300;
+        }
+        
+        .about-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), var(--glow);
+            position: relative;
+            border: 1px solid rgba(0, 243, 255, 0.3);
+        }
+        
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(0, 243, 255, 0.1), rgba(106, 0, 255, 0.1));
+            z-index: 1;
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* 项目展示 */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .project-card {
+            background: rgba(25, 25, 45, 0.5);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 243, 255, 0.2);
+            backdrop-filter: blur(5px);
+            position: relative;
+        }
+        
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(0, 243, 255, 0.05), rgba(106, 0, 255, 0.05));
+            z-index: 1;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 243, 255, 0.3), var(--glow);
+        }
+        
+        .project-image {
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .project-image::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60%;
+            background: linear-gradient(to top, rgba(10, 10, 25, 0.9), transparent);
+            z-index: 1;
+        }
+        
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .project-card:hover .project-image img {
+            transform: scale(1.1);
+        }
+        
+        .project-content {
+            padding: 25px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .project-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+            text-shadow: 0 0 8px var(--primary);
+            letter-spacing: 1.5px;
+        }
+        
+        .project-content p {
+            margin-bottom: 20px;
+            font-family: 'Exo 2', sans-serif;
+            font-weight: 300;
+        }
+        
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 15px 0;
+        }
+        
+        .tag {
+            background: rgba(0, 243, 255, 0.15);
+            color: var(--primary);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-family: 'Exo 2', sans-serif;
+            font-weight: 500;
+            border: 1px solid rgba(0, 243, 255, 0.3);
+            text-shadow: 0 0 5px var(--primary);
+        }
+        
+        /* 专业技能 */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .skill-category {
+            background: rgba(25, 25, 45, 0.5);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 243, 255, 0.2);
+            backdrop-filter: blur(5px);
+            position: relative;
+        }
+        
+        .skill-category::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(0, 243, 255, 0.05), rgba(106, 0, 255, 0.05));
+            z-index: 1;
+            border-radius: 10px;
+        }
+        
+        .skill-category h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+            text-shadow: 0 0 8px var(--primary);
+            letter-spacing: 1.5px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .skill-item {
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-family: 'Exo 2', sans-serif;
+        }
+        
+        .skill-header span:first-child {
+            font-weight: 500;
+            color: var(--light);
+        }
+        
+        .skill-header span:last-child {
+            font-weight: 600;
+            color: var(--primary);
+            text-shadow: 0 0 5px var(--primary);
+        }
+        
+        .skill-bar {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .skill-bar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            opacity: 0.2;
+        }
+        
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 4px;
+            position: relative;
+            box-shadow: var(--glow);
+        }
+        
+        /* 联系方式 */
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+        
+        .contact-info {
+            background: rgba(25, 25, 45, 0.5);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 243, 255, 0.2);
+            backdrop-filter: blur(5px);
+            position: relative;
+        }
+        
+        .contact-info::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(0, 243, 255, 0.05), rgba(106, 0, 255, 0.05));
+            z-index: 1;
+            border-radius: 10px;
+        }
+        
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+            text-shadow: 0 0 8px var(--primary);
+            letter-spacing: 1.5px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(0, 243, 255, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 1.5rem;
+            color: var(--primary);
+            border: 1px solid rgba(0, 243, 255, 0.3);
+            box-shadow: 0 0 10px rgba(0, 243, 255, 0.3);
+        }
+        
+        .contact-item h4 {
+            font-family: 'Exo 2', sans-serif;
+            font-weight: 500;
+            margin-bottom: 5px;
+            color: var(--light);
+        }
+        
+        .contact-item p {
+            font-family: 'Exo 2', sans-serif;
+            font-weight: 300;
+            color: var(--primary);
+            text-shadow: 0 0 5px var(--primary);
+            font-size: 1.1rem;
+        }
+        
+        input, textarea {
+            width: 100%;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 243, 255, 0.3);
+            background: #23262f; /* 深灰色输入框 */
+            color: #fff;
+            font-family: 'Exo 2', sans-serif;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            cursor: text; /* 鼠标悬停为文本输入样式 */
+        }
+        
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 15px var(--primary);
+            background: #23262f;
+            color: #fff;
+        }
+        
+        /* 表单状态消息 */
+        .form-status {
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+            font-family: 'Exo 2', sans-serif;
+            display: none;
+        }
+        
+        .success {
+            background: rgba(0, 255, 157, 0.2);
+            border: 1px solid var(--success);
+            color: var(--success);
+        }
+        
+        .error {
+            background: rgba(255, 23, 68, 0.2);
+            border: 1px solid var(--danger);
+            color: var(--danger);
+        }
+        
+        /* 页脚 */
+        footer {
+            background: var(--darker);
+            padding: 60px 0 30px;
+            text-align: center;
+            margin-top: 100px;
+            border-top: 1px solid rgba(0, 243, 255, 0.3);
+            position: relative;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .social-link {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(0, 243, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            font-size: 1.5rem;
+            color: var(--light);
+            border: 1px solid rgba(0, 243, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 243, 255, 0.3), transparent);
+            transition: 0.5s;
+        }
+        
+        .social-link:hover {
+            background: rgba(0, 243, 255, 0.2);
+            color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px var(--primary);
+        }
+        
+        .social-link:hover::before {
+            left: 100%;
+        }
+        
+        footer p {
+            margin: 10px 0;
+            font-family: 'Exo 2', sans-serif;
+            font-weight: 300;
+            color: var(--gray);
+        }
+        
+        .copyright {
+            font-size: 0.9rem;
+            margin-top: 30px;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 992px) {
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+            
+            .tagline {
+                font-size: 1.8rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .section-title {
+                font-size: 2.3rem;
+            }
+            
+            .about {
+                padding: 30px;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .language-switcher {
+                top: 15px;
+                right: 15px;
+            }
+            
+            .lang-btn {
+                padding: 6px 15px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* 动画效果 */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .pulse {
+            animation: pulse 3s ease-in-out infinite;
+        }
+        
+        /* 科幻元素 */
+        .sci-fi-element {
+            position: absolute;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .grid-line {
+            position: absolute;
+            background: rgba(0, 243, 255, 0.1);
+            z-index: -1;
+        }
+        
+        .hologram {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 243, 255, 0.1) 0%, transparent 70%);
+            filter: blur(20px);
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+    <!-- 科幻元素 -->
+    <div class="sci-fi-element hologram" style="top: 10%; left: 5%;"></div>
+    <div class="sci-fi-element hologram" style="top: 70%; right: 10%;"></div>
+    
+    <!-- 语言切换器 -->
+    <div class="language-switcher">
+        <button class="lang-btn active" id="en-btn">EN</button>
+        <button class="lang-btn" id="zh-btn">中文</button>
+    </div>
+    
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="logo">AUG3NS73RN</div>
+        <div class="nav-links">
+            <a href="#about" data-en="About" data-zh="关于我">About</a>
+            <a href="#projects" data-en="Projects" data-zh="项目作品">Projects</a>
+            <a href="#skills" data-en="Skills" data-zh="专业技能">Skills</a>
+            <a href="#contact" data-en="Contact" data-zh="联系方式">Contact</a>
+        </div>
+    </nav>
+
+    <!-- 英雄区域 -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>ANTHONY<br>HE YANCHEN</h1>
+                <div class="tagline" data-en="Game Designer" data-zh="游戏设计师">Game Designer</div>
+                <p data-en="Crafting engaging gameplay experiences through innovative combat systems, data-driven game balancing, and strategic mechanics. Experienced in creating compelling battle scenarios and numerical systems, bringing worlds to life through sound design." data-zh="专注于创新的战斗系统、数据驱动的游戏平衡以及策略性机制开发。擅长打造引人入胜的战斗场景和数值系统，用声音为游戏世界注入活力。">Crafting engaging gameplay experiences through innovative combat systems, data-driven game balancing, and strategic mechanics. Experienced in creating compelling battle scenarios and numerical systems, bringing worlds to life through sound design.</p>
+                <a href="#projects" class="btn" data-en="View Projects" data-zh="查看项目">View Projects</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 关于我 -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title" data-en="About Me" data-zh="关于我">About Me</h2>
+            <div class="about">
+                <div class="about-content">
+                    <div class="about-text">
+                        <h3 data-en="Visionary Creator" data-zh="前瞻性创作者">Visionary Creator</h3>
+                        <p data-en="I'm Anthony He, a Game Design student at New York University (NYU), specializing in game development, sound design, and interactive storytelling. With a diverse skill set and multicultural background, I create unique experiences that blend technical innovation with creative vision." data-zh="我是何彦辰，纽约大学游戏设计专业学生，专注于游戏开发、音效设计和互动叙事。凭借多元化的技能和跨文化背景，我创造融合技术创新与创意愿景的独特体验。">I'm Anthony He, a Game Design student at New York University (NYU), specializing in game development, sound design, and interactive storytelling. With a diverse skill set and multicultural background, I create unique experiences that blend technical innovation with creative vision.</p>
+                        
+                        <h3 style="margin-top: 30px; margin-bottom: 15px;" data-en="Education" data-zh="教育背景">Education</h3>
+                        <p><strong>New York University (NYU)</strong><br>
+                        <span data-en="BFA in Game Design | Sophomore | GPA: 3.4/4.0" data-zh="游戏设计学士 | 大二 | GPA: 3.4/4.0">BFA in Game Design | Sophomore | GPA: 3.4/4.0</span></p>
+                        <p><strong>Shanghai World Foreign Language Academy</strong><br>
+                        <span data-en="International Baccalaureate (IB) Diploma" data-zh="国际文凭（IB）课程">International Baccalaureate (IB) Diploma</span></p>
+                        
+                        <h3 style="margin-top: 30px; margin-bottom: 15px;" data-en="Language Proficiency" data-zh="语言能力">Language Proficiency</h3>
+                        <p><strong>English</strong>: <span data-en="Native fluency (TOEFL 114, SAT 1450)" data-zh="流利（托福114分，SAT 1450分）">Native fluency (TOEFL 114, SAT 1450)</span></p>
+                        <p><strong>Spanish & Japanese</strong>: <span data-en="Basic conversational proficiency" data-zh="基础会话能力">Basic conversational proficiency</span></p>
+                        
+                        <div class="btn" style="margin-top: 30px;" data-en="Download Resume" data-zh="下载简历">Download Resume</div>
+                    </div>
+                    <div class="about-image">
+                        <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Game Design Work">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 项目作品 -->
+    <section id="projects" class="section">
+        <div class="container">
+            <h2 class="section-title" data-en="Projects" data-zh="项目作品">Projects</h2>
+            <div class="projects-grid">
+                <!-- 项目1 -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="bubble.jpg" alt="Me and Your Bubbles">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title" data-en="Me and Your Bubbles" data-zh="我和你的泡泡">Me and Your Bubbles</h3>
+                        <p data-en="Global Game Jam 2025 project - A rhythm-based narrative game exploring emotional connections" data-zh="Global Game Jam 2025项目 - 一款探索情感连接的节奏叙事游戏">Global Game Jam 2025 project - A rhythm-based narrative game exploring emotional connections</p>
+                        <div class="project-tags">
+                            <span class="tag">Unity</span>
+                            <span class="tag">Sound Design</span>
+                            <span class="tag">Narrative</span>
+                        </div>
+                        <div class="project-details">
+                            <ul style="margin-top: 15px; padding-left: 20px; font-family: 'Exo 2', sans-serif; font-weight: 300;">
+                                <li data-en="Co-wrote English background story and dialogues" data-zh="合作撰写英文背景故事与对话">Co-wrote English background story and dialogues</li>
+                                <li data-en="Designed rhythm-based interaction mechanics" data-zh="设计基于节奏的互动机制">Designed rhythm-based interaction mechanics</li>
+                                <li data-en="Created and implemented all sound effects and music" data-zh="创作并实现所有音效与音乐">Created and implemented all sound effects and music</li>
+                            </ul>
+                        </div>
+                        <a href="https://marclous.itch.io/me-and-your-bubbles" target="_blank" class="btn" style="margin-top: 15px;" data-en="View Project" data-zh="查看项目">View Project</a>
+                    </div>
+                </div>
+                
+                <!-- 项目2 -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1534423861386-85a16f5d13fd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Nidhogg-like Fighter">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title" data-en="Nidhogg-like Fighter" data-zh="类Nidhogg格斗游戏">Nidhogg-like Fighter</h3>
+                        <p data-en="Team-developed duel fighting game with innovative parry system" data-zh="团队开发的格斗游戏，创新加入格挡系统">Team-developed duel fighting game with innovative parry system</p>
+                        <div class="project-tags">
+                            <span class="tag">GameMaker</span>
+                            <span class="tag">Programming</span>
+                            <span class="tag">Art Design</span>
+                        </div>
+                        <div class="project-details">
+                            <ul style="margin-top: 15px; padding-left: 20px; font-family: 'Exo 2', sans-serif; font-weight: 300;">
+                                <li data-en="Programmed camera logic and character animations" data-zh="编写摄像机逻辑与角色动画">Programmed camera logic and character animations</li>
+                                <li data-en="Designed and implemented parry combat mechanics" data-zh="设计并实现格挡战斗机制">Designed and implemented parry combat mechanics</li>
+                                <li data-en="Created all environmental art assets" data-zh="创作所有环境美术资源">Created all environmental art assets</li>
+                            </ul>
+                        </div>
+                        <a href="#" class="btn" style="margin-top: 15px;" data-en="View Demo" data-zh="查看演示">View Demo</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 专业技能 -->
+    <section id="skills" class="section">
+        <div class="container">
+            <h2 class="section-title" data-en="Skills" data-zh="专业技能">Skills</h2>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3 data-en="Game Development" data-zh="游戏开发">Game Development</h3>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span data-en="Unity Engine" data-zh="Unity引擎">Unity Engine</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 85%;"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span data-en="GameMaker Studio" data-zh="GameMaker Studio">GameMaker Studio</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 80%;"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span data-en="Unreal Engine" data-zh="虚幻引擎">Unreal Engine</span>
+                            <span>65%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 65%;"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span data-en="C# Programming" data-zh="C#编程">C# Programming</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 80%;"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3 data-en="Web & Media" data-zh="网页与媒体">Web & Media</h3>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span data-en="Music Composition" data-zh="音乐编曲">Music Composition</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 80%;"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span data-en="Web Development (HTML/CSS/JS/PHP)" data-zh="网页开发 (HTML/CSS/JS/PHP)">Web Development (HTML/CSS/JS/PHP)</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 85%;"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span data-en="Sound Design" data-zh="音效设计">Sound Design</span>
+                            <span>78%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 78%;"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span data-en="Premiere Pro & AE" data-zh="Premiere Pro & AE">Premiere Pro & AE</span>
+                            <span>72%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 72%;"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3 data-en="Design & Production" data-zh="设计与制作">Design & Production</h3>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span data-en="Game Mechanics" data-zh="游戏机制">Game Mechanics</span>
+                            <span>83%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 83%;"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span data-en="Narrative Design" data-zh="叙事设计">Narrative Design</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 80%;"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span data-en="Data Table Design" data-zh="数值表编写">Data Table Design</span>
+                            <span>75%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 75%;"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span data-en="Team Collaboration" data-zh="团队协作">Team Collaboration</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 85%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 游戏领域 -->
+    <section id="gaming-field" class="section">
+        <div class="container">
+            <h2 class="section-title" data-en="Field of Games I Play" data-zh="游戏涉猎领域">Field of Games I Play</h2>
+            <div class="skills-container">
+                <!-- PC Games -->
+                <div class="skill-category">
+                    <h3 data-en="PC Games" data-zh="PC游戏">PC Games</h3>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span data-en="Turn-based RPG (P5 Series)" data-zh="回合制RPG（P5系列）">Turn-based RPG (P5 Series)</span>
+                            <span>95%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 95%;"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span data-en="ARPG (Monster Hunter Series)" data-zh="动作RPG（怪猎系列、剑星）">ARPG (Monster Hunter Series)</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 90%;"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span data-en="Horror Games (Silent Hill)" data-zh="恐怖游戏（寂静岭）">Horror Games (Silent Hill)</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 85%;"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span data-en="Action Adventure (Uncharted)" data-zh="动作冒险（神海）">Action Adventure (Uncharted)</span>
+                            <span>88%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 88%;"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span data-en="Open World (Cyberpunk 2077)" data-zh="开放世界（赛博朋克2077）">Open World (Cyberpunk 2077)</span>
+                            <span>92%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 92%;"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span data-en="Multiplayer FPS (CS Series)" data-zh="多人FPS（CS系列）">Multiplayer FPS (CS Series)</span>
+                            <span>87%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 87%;"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Mobile Games -->
+                <div class="skill-category">
+                    <h3 data-en="Mobile Games" data-zh="移动端游戏">Mobile Games</h3>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span data-en="Anime Games (Star Rail, ZZZ)" data-zh="二次元游戏（星铁、绝区零）">Anime Games (Star Rail, ZZZ)</span>
+                            <span>93%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 93%;"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span data-en="Action Games (PGR)" data-zh="动作游戏（战双）">Action Games (PGR)</span>
+                            <span>88%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 88%;"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span data-en="Card Games (Slay the Spire)" data-zh="卡牌游戏（杀戮尖塔）">Card Games (Slay the Spire)</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 85%;"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span data-en="Auto Chess (TFT)" data-zh="自走棋（云顶之弈）">Auto Chess (TFT)</span>
+                            <span>86%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 86%;"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Game Analysis -->
+                <div class="skill-category">
+                    <h3 data-en="Game Analysis Focus" data-zh="游戏分析重点">Game Analysis Focus</h3>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span data-en="Combat System Design" data-zh="战斗系统设计">Combat System Design</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 90%;"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span data-en="Level Design & Atmosphere" data-zh="关卡设计与氛围营造">Level Design & Atmosphere</span>
+                            <span>88%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 88%;"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span data-en="Game Balance & Economy" data-zh="游戏平衡与经济系统">Game Balance & Economy</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 85%;"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span data-en="Player Experience Design" data-zh="玩家体验设计">Player Experience Design</span>
+                            <span>92%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 92%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系方式 -->
+    <section id="contact" class="section">
+        <div class="container">
+            <h2 class="section-title" data-en="Contact" data-zh="联系方式">Contact</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3 data-en="Contact Info" data-zh="联系信息">Contact Info</h3>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div>
+                            <h4 data-en="Phone" data-zh="电话">Phone</h4>
+                            <p>+86 183-2141-0758</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h4 data-en="Email" data-zh="邮箱">Email</h4>
+                            <p>yh5171@nyu.edu</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <h4 data-en="Location" data-zh="所在地">Location</h4>
+                            <p data-en="New York University" data-zh="纽约大学">New York University</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-language"></i>
+                        </div>
+                        <div>
+                            <h4 data-en="Languages" data-zh="语言">Languages</h4>
+                            <p data-en="English, Chinese, Spanish, Japanese" data-zh="英语、中文、西班牙语、日语">English, Chinese, Spanish, Japanese</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-info">
+                    <h3 data-en="Send Message" data-zh="发送消息">Send Message</h3>
+                    <form id="contact-form">
+                        <div>
+                            <input type="text" id="name" placeholder="Your Name" data-en-placeholder="Your Name" data-zh-placeholder="您的姓名" required>
+                        </div>
+                        <div>
+                            <input type="email" id="email" placeholder="Your Email" data-en-placeholder="Your Email" data-zh-placeholder="您的邮箱" required>
+                        </div>
+                        <div>
+                            <input type="text" id="subject" placeholder="Subject" data-en-placeholder="Subject" data-zh-placeholder="主题">
+                        </div>
+                        <div>
+                            <textarea id="message" placeholder="Your Message" data-en-placeholder="Your Message" data-zh-placeholder="您的留言" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn" data-en="Send Message" data-zh="发送消息">Send Message</button>
+                        <div id="form-status" class="form-status"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-artstation"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-itch-io"></i></a>
+            </div>
+            <p data-en="© 2025 Anthony He" data-zh="© 2025 何彦辰">© 2025 Anthony He</p>
+            <p class="copyright" data-en="All content is original work, unauthorized reproduction prohibited" data-zh="所有内容均为原创作品，未经授权禁止转载">All content is original work, unauthorized reproduction prohibited</p>
+        </div>
+    </footer>
+
+    <script>
+        // 语言切换功能
+        const enBtn = document.getElementById('en-btn');
+        const zhBtn = document.getElementById('zh-btn');
+        let currentLang = 'en';
+        
+        function switchLanguage(lang) {
+            currentLang = lang;
+            
+            // 更新按钮状态
+            if (lang === 'en') {
+                enBtn.classList.add('active');
+                zhBtn.classList.remove('active');
+            } else {
+                zhBtn.classList.add('active');
+                enBtn.classList.remove('active');
+            }
+            
+            // 更新所有带有语言属性的文本
+            document.querySelectorAll('[data-en], [data-zh]').forEach(element => {
+                if (element.hasAttribute(`data-${lang}`)) {
+                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                        element.placeholder = element.getAttribute(`data-${lang}-placeholder`);
+                    } else {
+                        element.textContent = element.getAttribute(`data-${lang}`);
+                    }
+                }
+            });
+        }
+        
+        enBtn.addEventListener('click', () => switchLanguage('en'));
+        zhBtn.addEventListener('click', () => switchLanguage('zh'));
+        
+        // 平滑滚动效果
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // 滚动时导航栏效果
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.padding = '0.8rem 5%';
+                navbar.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.5), 0 0 15px var(--primary)';
+            } else {
+                navbar.style.padding = '1.2rem 5%';
+                navbar.style.boxShadow = '0 0 15px var(--primary)';
+            }
+        });
+
+        // 表单提交功能
+        const contactForm = document.getElementById('contact-form');
+        const formStatus = document.getElementById('form-status');
+        
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // 获取表单数据
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            // 显示发送中状态
+            formStatus.textContent = currentLang === 'en' ? 'Sending message...' : '正在发送消息...';
+            formStatus.className = 'form-status';
+            formStatus.style.display = 'block';
+            
+            // 模拟API请求
+            setTimeout(() => {
+                // 模拟成功发送
+                formStatus.textContent = currentLang === 'en' 
+                    ? 'Message sent successfully! I will contact you soon.' 
+                    : '消息发送成功！我会尽快联系您。';
+                formStatus.className = 'form-status success';
+                
+                // 清空表单
+                contactForm.reset();
+                
+                // 3秒后隐藏状态消息
+                setTimeout(() => {
+                    formStatus.style.display = 'none';
+                }, 3000);
+            }, 1500);
+        });
+
+        // 动态网格效果
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.body;
+            const lineCount = 30;
+            
+            for (let i = 0; i < lineCount; i++) {
+                const line = document.createElement('div');
+                line.className = 'sci-fi-element grid-line';
+                
+                if (i % 2 === 0) {
+                    // 水平线
+                    line.style.width = '100%';
+                    line.style.height = '1px';
+                    line.style.top = `${(i / lineCount) * 100}%`;
+                    line.style.left = '0';
+                } else {
+                    // 垂直线
+                    line.style.width = '1px';
+                    line.style.height = '100%';
+                    line.style.left = `${((i-1) / lineCount) * 100}%`;
+                    line.style.top = '0';
+                }
+                
+                container.appendChild(line);
+            }
+            
+            // 初始化语言
+            switchLanguage('en');
+        });
+    </script>
+</body>
+</html>
