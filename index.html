@@ -1170,6 +1170,23 @@
                 border: 1px solid #ccc;
             }
         }
+        /* 放大audio播放键并添加点击效果 */
+        #thatday-audio::-webkit-media-controls-play-button {
+            transform: scale(1.2);
+            transition: box-shadow 0.2s, background 0.2s;
+            border-radius: 50%;
+            box-shadow: 0 0 0 transparent;
+        }
+        #thatday-audio:focus::-webkit-media-controls-play-button,
+        #thatday-audio::-webkit-media-controls-play-button:active {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            box-shadow: 0 0 15px var(--primary), 0 0 30px rgba(0,243,255,0.3);
+            outline: none;
+        }
+        /* Firefox和其他浏览器兼容性处理 */
+        #thatday-audio {
+            accent-color: var(--primary);
+        }
     </style>
 </head>
 <body>
