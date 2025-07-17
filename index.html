@@ -1304,7 +1304,7 @@
                     <div class="project-image" style="height:120px; display:flex; align-items:center; justify-content:center; background:rgba(0,243,255,0.05); flex-direction:column;">
                         <span class="project-title" style="font-size:1.3rem; color:var(--primary); margin-bottom:10px;">あの日</span>
                         <audio id="thatday-audio" controls style="width:90%;">
-                            <source src="tracks/thatday.wav" type="audio/wav">
+                            <source src="tracks/thatday.mp3" type="audio/mpeg">
                             Your browser does not support the audio element.
                         </audio>
                     </div>
@@ -1796,24 +1796,26 @@
             
             // 初始化语言
             switchLanguage('en');
-        });
 
-        // Original Tracks: 下拉描述动画
-        const audio = document.getElementById('thatday-audio');
-        const desc = document.getElementById('thatday-desc');
-        let descShown = false;
-        audio.addEventListener('play', function() {
-            if (!descShown) {
-                desc.style.padding = '20px 25px';
-                desc.style.maxHeight = '200px';
-                descShown = true;
-            }
-        });
-        audio.addEventListener('pause', function() {
-            if (!audio.currentTime || audio.currentTime === 0) {
-                desc.style.maxHeight = '0';
-                desc.style.padding = '0 25px';
-                descShown = false;
+            // Original Tracks: 下拉描述动画
+            const audio = document.getElementById('thatday-audio');
+            const desc = document.getElementById('thatday-desc');
+            let descShown = false;
+            if (audio && desc) {
+                audio.addEventListener('play', function() {
+                    if (!descShown) {
+                        desc.style.padding = '20px 25px';
+                        desc.style.maxHeight = '200px';
+                        descShown = true;
+                    }
+                });
+                audio.addEventListener('pause', function() {
+                    if (!audio.currentTime || audio.currentTime === 0) {
+                        desc.style.maxHeight = '0';
+                        desc.style.padding = '0 25px';
+                        descShown = false;
+                    }
+                });
             }
         });
     </script>
