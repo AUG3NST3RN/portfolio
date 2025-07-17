@@ -1292,6 +1292,32 @@
         </div>
     </section>
 
+    <!-- 原创配乐 -->
+    <section id="original-tracks" class="section">
+        <div class="container">
+            <h2 class="section-title" data-en="Original Tracks" data-zh="原创配乐">Original Tracks</h2>
+            <p style="text-align:center; max-width:700px; margin:0 auto 40px; color:var(--gray); font-size:1.15rem; font-family:'Exo 2',sans-serif;">
+                <span data-en="A selection of original music tracks composed for various game projects. Each piece is crafted to enhance the atmosphere and emotional resonance of the gameplay experience." data-zh="部分为不同游戏项目创作的原创配乐，旨在提升游戏氛围与情感体验。">A selection of original music tracks composed for various game projects. Each piece is crafted to enhance the atmosphere and emotional resonance of the gameplay experience.</span>
+            </p>
+            <div class="projects-grid" style="display:flex; justify-content:center;">
+                <div class="project-card" style="width:350px;">
+                    <div class="project-image" style="height:120px; display:flex; align-items:center; justify-content:center; background:rgba(0,243,255,0.05); flex-direction:column;">
+                        <span class="project-title" style="font-size:1.3rem; color:var(--primary); margin-bottom:10px;">あの日</span>
+                        <audio id="thatday-audio" controls style="width:90%;">
+                            <source src="tracks/thatday.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </div>
+                    <div class="project-content" style="padding:0;">
+                        <div id="thatday-desc" style="max-height:0; overflow:hidden; transition:max-height 0.7s cubic-bezier(0.4,0,0.2,1), padding 0.7s; padding:0 25px;">
+                            <p data-en="A gentle, nostalgic original track composed for a story-driven game, evoking memories of days gone by." data-zh="为叙事向游戏创作的温柔怀旧配乐，唤起逝去时光的回忆。">A gentle, nostalgic original track composed for a story-driven game, evoking memories of days gone by.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- 专业技能 -->
     <section id="skills" class="section">
         <div class="container">
@@ -1531,37 +1557,37 @@
                     <div class="skill-item">
                         <div class="skill-header">
                             <span data-en="Combat System Design" data-zh="战斗系统设计">Combat System Design</span>
-                            <span>90%</span>
+                            <span>80%</span>
                         </div>
                         <div class="skill-bar">
-                            <div class="skill-progress" style="width: 90%;"></div>
+                            <div class="skill-progress" style="width: 80%;"></div>
                         </div>
                     </div>
                     <div class="skill-item">
                         <div class="skill-header">
                             <span data-en="Level Design & Atmosphere" data-zh="关卡设计与氛围营造">Level Design & Atmosphere</span>
-                            <span>88%</span>
+                            <span>78%</span>
                         </div>
                         <div class="skill-bar">
-                            <div class="skill-progress" style="width: 88%;"></div>
+                            <div class="skill-progress" style="width: 78%;"></div>
                         </div>
                     </div>
                     <div class="skill-item">
                         <div class="skill-header">
                             <span data-en="Game Balance & Economy" data-zh="游戏平衡与经济系统">Game Balance & Economy</span>
-                            <span>85%</span>
+                            <span>75%</span>
                         </div>
                         <div class="skill-bar">
-                            <div class="skill-progress" style="width: 85%;"></div>
+                            <div class="skill-progress" style="width: 75%;"></div>
                         </div>
                     </div>
                     <div class="skill-item">
                         <div class="skill-header">
                             <span data-en="Player Experience Design" data-zh="玩家体验设计">Player Experience Design</span>
-                            <span>92%</span>
+                            <span>82%</span>
                         </div>
                         <div class="skill-bar">
-                            <div class="skill-progress" style="width: 92%;"></div>
+                            <div class="skill-progress" style="width: 82%;"></div>
                         </div>
                     </div>
                 </div>
@@ -1770,6 +1796,25 @@
             
             // 初始化语言
             switchLanguage('en');
+        });
+
+        // Original Tracks: 下拉描述动画
+        const audio = document.getElementById('thatday-audio');
+        const desc = document.getElementById('thatday-desc');
+        let descShown = false;
+        audio.addEventListener('play', function() {
+            if (!descShown) {
+                desc.style.padding = '20px 25px';
+                desc.style.maxHeight = '200px';
+                descShown = true;
+            }
+        });
+        audio.addEventListener('pause', function() {
+            if (!audio.currentTime || audio.currentTime === 0) {
+                desc.style.maxHeight = '0';
+                desc.style.padding = '0 25px';
+                descShown = false;
+            }
         });
     </script>
 </body>
