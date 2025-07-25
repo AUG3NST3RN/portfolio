@@ -1212,7 +1212,7 @@
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1>ANTHONY<br>HE YANCHEN</h1>
+                <h1 data-en="ANTHONY<br>HE YANCHEN" data-zh="ANTHONY<br>何彦辰">ANTHONY<br>HE YANCHEN</h1>
                 <div class="tagline" data-en="Game Designer" data-zh="游戏设计师">Game Designer</div>
                 <p data-en="Crafting engaging gameplay experiences through innovative combat systems, data-driven game balancing, and strategic mechanics. Experienced in creating compelling battle scenarios and numerical systems, bringing worlds to life through sound design." data-zh="专注于创新的战斗系统、数据驱动的游戏平衡以及策略性机制开发。擅长打造引人入胜的战斗场景和数值系统，用声音为游戏世界注入活力。">Crafting engaging gameplay experiences through innovative combat systems, data-driven game balancing, and strategic mechanics. Experienced in creating compelling battle scenarios and numerical systems, bringing worlds to life through sound design.</p>
                 <a href="#projects" class="btn" data-en="View Projects" data-zh="查看项目">View Projects</a>
@@ -1715,7 +1715,7 @@
                     if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
                         element.placeholder = element.getAttribute(`data-${lang}-placeholder`);
                     } else {
-                        element.textContent = element.getAttribute(`data-${lang}`);
+                        element.innerHTML = element.getAttribute(`data-${lang}`);
                     }
                 }
             });
